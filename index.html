@@ -3,8 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Robin Gaudu · CRM, data marketing et IA</title>
-<meta name="description" content="Robin Gaudu : Digital Marketing, CRM & Data Specialist. Master Digital Marketing (IPAG), 2,5 ans chez Consentio en CRM, emailing et data marketing. Disponible immédiatement pour un CDI.">
+<title>Robin Gaudu · Chargé marketing digital, CRM & data</title>
+<meta name="description" content="Robin Gaudu, chargé marketing digital, CRM et data. Master Digital Marketing (IPAG), plus de 2 ans et demi chez Consentio : taux d'ouverture doublé (18 → 36 %), 9 000 contacts automatisés. Disponible immédiatement en CDI.">
+<meta name="author" content="Robin Gaudu">
+<link rel="canonical" href="https://gaudurobin-lang.github.io/robtest/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://gaudurobin-lang.github.io/robtest/">
+<meta property="og:title" content="Robin Gaudu · Chargé marketing digital, CRM & data">
+<meta property="og:description" content="Mon CV interactif, carte par carte : CRM, data, IA et projets d'automatisation. Disponible immédiatement en CDI.">
+<meta property="og:image" content="https://gaudurobin-lang.github.io/robtest/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Robin Gaudu, chargé marketing digital, CRM et data : CV interactif">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236d4cff'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='28' fill='%23fff' text-anchor='middle'%3ERG%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#8ccbf5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,10 +61,10 @@ a{color:inherit}
 .hud{position:fixed;top:0;left:0;right:0;z-index:30;padding:14px var(--pad) 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;row-gap:14px}
 .topline{grid-column:1/-1;height:3px;background:rgba(255,255,255,.55);border-radius:3px;position:relative;overflow:hidden}
 .topline span{position:absolute;left:0;top:0;height:100%;width:10%;background:var(--ink);border-radius:3px;transition:width .8s var(--ease)}
-.status{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.status{justify-self:start;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .status .dot{width:9px;height:9px;border-radius:50%;background:#14b85a;box-shadow:0 0 0 4px rgba(20,184,90,.2);animation:pulse 2s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(20,184,90,.06)}}
-.logo{justify-self:center;text-decoration:none;font-weight:800;font-size:clamp(18px,1.6vw,23px);letter-spacing:-.02em}
+.logo{justify-self:center;text-decoration:none;font-weight:800;font-size:clamp(18px,1.6vw,23px);letter-spacing:-.02em;padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .logo span{color:var(--c);transition:color 1s}
 .hud-r{justify-self:end;display:flex;gap:10px;align-items:center}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;background:rgba(255,255,255,.7);box-shadow:0 2px 10px rgba(15,29,51,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .25s,transform .25s}
@@ -82,6 +95,9 @@ a{color:inherit}
 .b-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .b-photo b{font-weight:800;font-size:1.5em;opacity:.7}
 .b-photo small{position:absolute;bottom:.45em;font-family:var(--mono);font-size:.3em;letter-spacing:.18em;opacity:.85}
+.b-photo.ico{border:0;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.b-photo.pic{border:.08em solid rgba(255,255,255,.9)}
+.b-photo svg{width:50%;height:50%}
 .b-cat{align-self:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;margin-top:.5em;padding:.32em .7em;border-radius:99em;background:rgba(255,255,255,.95);color:color-mix(in oklab,var(--k) 70%,#000);font-weight:800;font-size:.4em;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .b-title{margin-top:.38em;text-align:center;font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;font-size:calc(var(--fs)*1em);text-shadow:0 .04em .2em rgba(0,0,0,.18)}
 .b-name{margin-top:.35em;text-align:center;font-weight:600;font-size:.44em;letter-spacing:.04em;opacity:.95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -110,17 +126,22 @@ a{color:inherit}
 .arrow.prev{left:calc(50% - clamp(75px,7.5vw,120px) - 96px)}
 .arrow.next{left:calc(50% + clamp(75px,7.5vw,120px) + 28px)}
 .arrow small{position:absolute;top:100%;margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--ink);opacity:.75}
-.caption{position:absolute;left:50%;bottom:calc(var(--pad) + 86px);transform:translateX(-50%);text-align:center;width:min(92vw,760px);pointer-events:none}
+.caption{position:absolute;left:50%;bottom:calc(var(--pad) + 76px);transform:translateX(-50%);text-align:center;width:min(92vw,760px);pointer-events:none}
 .caption .kicker{color:var(--mute);font-weight:700;margin-bottom:10px}
 .caption h1{font-size:clamp(34px,4.4vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1}
 .caption .teaser{margin:12px auto 0;max-width:52ch;color:#24344d;font-size:clamp(15px,1.15vw,18px);line-height:1.5;font-weight:500}
 .caption > *{transition:opacity .35s,transform .45s var(--soft)}
 .caption.swap > *{opacity:0;transform:translateY(10px)}
+.caption.swap > .cta{opacity:1;transform:none}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;pointer-events:auto}
+.cta .btn{padding:10px 18px;font-size:14px;background:rgba(255,255,255,.75)}
+.cta .btn.solid{background:var(--ink)}
+.cta .btn:hover{background:var(--ink);color:#fff}
 .dots{position:absolute;left:50%;bottom:calc(var(--pad) + 44px);transform:translateX(-50%);display:flex;gap:8px;z-index:40}
 .dots button{width:10px;height:10px;border-radius:99px;background:rgba(15,29,51,.25);transition:width .4s var(--soft),background .4s}
 .dots button.on{width:34px;background:var(--c)}
 .dots button:hover{background:rgba(15,29,51,.5)}
-.hint{position:absolute;left:50%;bottom:calc(var(--pad) + 10px);transform:translateX(-50%);color:var(--mute);white-space:nowrap}
+.hint{position:absolute;left:50%;bottom:calc(var(--pad) + 10px);transform:translateX(-50%);color:#33445e;white-space:nowrap}
 body.is-detail #carousel{opacity:0;filter:blur(10px);pointer-events:none}
 
 /* ---------- vue détail ---------- */
@@ -249,6 +270,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
 /* ---------- mobile ---------- */
 @media (max-width:860px){
   .hud{grid-template-columns:auto 1fr auto}
+  .status{padding:9px}
   .status .lbl{display:none}
   .logo{font-size:17px}
   .pill{padding:9px 13px;font-size:13px}
@@ -259,12 +281,15 @@ body.loaded #loader{opacity:0;visibility:hidden}
   .arrow.prev{left:var(--pad)}.arrow.next{left:auto;right:var(--pad)}
   .arrow small{display:none}
   .caption{bottom:calc(var(--pad) + 104px)}
-  .caption .teaser{display:none}
+  .caption h1{font-size:30px}
+  .caption .teaser{font-size:14px;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .cta{margin-top:12px}
+  .cta .btn{padding:9px 14px;font-size:13.5px}
   .dots{bottom:calc(var(--pad) + 52px)}
   .hint{display:none}
-  .hero{left:50%;top:30%}
-  .hero-can .bwrap{--w:min(26vh,46vw)}
-  .panel{left:10px;right:10px;width:auto;top:auto;bottom:74px;transform:none;max-height:56vh;touch-action:pan-y;padding:20px}
+  .hero{left:77%;top:21%}
+  .hero-can .bwrap{--w:min(17vh,29vw)}
+  .panel{left:10px;right:10px;width:auto;top:auto;bottom:74px;transform:none;max-height:calc(100vh - 330px);max-height:calc(100dvh - 330px);touch-action:pan-y;padding:20px}
   .secnav{right:auto;left:var(--pad);top:calc(var(--pad) + 62px);transform:none;flex-direction:row;gap:6px}
   .secnav button{width:32px;height:32px;font-size:10px}
   .d-top{left:var(--pad);right:auto;top:calc(var(--pad) + 104px)}
@@ -284,7 +309,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
 
 <header class="hud">
   <div class="topline" aria-hidden="true"><span id="topbar"></span></div>
-  <div class="status"><span class="dot"></span><span class="lbl">Disponible · CDI</span></div>
+  <div class="status"><span class="dot"></span><span class="lbl">Disponible immédiatement · CDI</span></div>
   <a class="logo" href="#" id="logo" aria-label="Robin Gaudu, retour à l'accueil">Robin Gaudu<span>.</span></a>
   <div class="hud-r">
     <button class="pill" id="menuBtn" aria-controls="menu" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><g fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></g></svg><span class="lbl">Toutes les cartes</span></button>
@@ -301,6 +326,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
       <p class="kicker mono" id="capKicker"></p>
       <h1 id="capTitle"></h1>
       <p class="teaser" id="capTeaser"></p>
+      <div class="cta"><button class="btn solid" data-open="cv">Voir mon CV</button><button class="btn" data-open="contact">Me contacter</button></div>
     </div>
     <div class="dots" id="dots" role="tablist" aria-label="Choisir une carte"></div>
     <p class="hint mono">Cliquez ou molette ↓ pour ouvrir la carte · flèches pour changer</p>
@@ -359,22 +385,23 @@ body.loaded #loader{opacity:0;visibility:hidden}
    Sans photo, le badge affiche « RG ». */
 const ITEMS = [
  { id:'cv', cat:'CV', badge:['Robin','Gaudu'], name:'Marketing digital · CRM · Data', stat:'CV complet', photo:'', color:'#6d4cff',
-   title:'Robin Gaudu', kicker:'01 · CV',
-   teaser:"Chargé marketing digital, CRM et data. Plus de 2 ans et demi chez Consentio en CRM, emailing et data marketing. Disponible immédiatement.",
+   title:'Robin Gaudu', kicker:'01 · CV · Disponible immédiatement',
+   short:"Chargé marketing digital, CRM et data. Chez Consentio : taux d'ouverture doublé (18 → 36 %) et 9 000 contacts automatisés.",
+   teaser:"Chargé marketing digital, CRM et data. Chez Consentio, j'ai doublé le taux d'ouverture des newsletters (18 → 36 %) et automatisé une base de 9 000 contacts. Disponible immédiatement en CDI.",
    sections:[
     { tag:'Profil', title:'CRM, data et IA',
-      text:["Diplômé d'un Master Digital Marketing (IPAG Business School), avec plus de 2,5 ans chez Consentio (SaaS B2B, Madrid et Paris) en CRM, emailing et data marketing.",
+      text:["Diplômé d'un Master Digital Marketing (IPAG Business School), avec plus de 2 ans et demi chez Consentio (SaaS B2B, Madrid et Paris) en CRM, emailing et data marketing.",
             "Certifié Google Analytics et Google Tag Manager, j'utilise l'IA générative et des agents IA au quotidien pour livrer plus vite et automatiser les tâches répétitives."],
-      stats:[['18 → 36 %',"taux d'ouverture des newsletters"],['9 000','contacts automatisés'],['30','workflows HubSpot et ActiveCampaign']] },
+      stats:[['18 → 36 %',"taux d'ouverture des newsletters"],['9 000','contacts segmentés et automatisés'],['30','workflows HubSpot et ActiveCampaign']] },
     { tag:'Parcours', title:'Expériences',
-      steps:[['Consentio · Madrid et Paris','Junior Client Success & Product Marketing · stage puis alternance · mars 2024 – oct. 2026'],['Nous Anti-Gaspi · Paris','Commercial secteur · stage · avr. – août 2023'],['Louis Vuitton · Paris','Vendeur et Personal Shopper, homme · CDD · mai – août 2022'],['La Maison Nordique · Paris','Vendeur et conseiller produits premium · stage']],
+      steps:[['Consentio · Madrid et Paris','Client Success & Product Marketing Junior · stage puis alternance · mars 2024 – oct. 2026'],['Nous Anti-Gaspi · Paris','Responsable secteur et commercial · stage · avr. – août 2023'],['Louis Vuitton · Paris','Vendeur et Personal Shopper, homme · CDD · mai – août 2022'],['La Maison Nordique · Paris','Vendeur et conseiller produits premium · stage']],
       acts:[['Consentio','go:consentio'],['Nous Anti-Gaspi','go:nous-anti-gaspi'],['Louis Vuitton','go:louis-vuitton'],['La Maison Nordique','go:maison-nordique']] },
     { tag:'2021 – 2026', title:'Formation',
       steps:[['IPAG Business School · 2021 – 2026','Master Programme Grande École, Digital Marketing. Spécialisation : stratégie d\'acquisition, analytics, CRM et performance. Certifications 2026 : Google Analytics, Google Tag Manager'],['Algebra University College · Zagreb · sept. 2023 – févr. 2024','3e année Marketing Digital (Erasmus) : marketing digital international, e-commerce, social media, data privacy'],['Lycée Les Petits Champs · Paris · 2021','Baccalauréat STMG']] },
     { tag:'Compétences', title:'Outils',
       chips:[['HubSpot',1],['ActiveCampaign',1],['GA4',1],['Google Tag Manager',1],['Looker Studio'],['Excel avancé (TCD)'],['SQL (bases)'],['SEMrush'],['Webflow'],['Canva'],['Stonly'],['Claude',1],['ChatGPT',1],['Gemini',1],['Zapier / Make'],['n8n']],
       acts:[['Carte CRM','go:crm'],['Carte Data','go:data'],['Carte IA','go:ia']] },
-    { tag:'Langues', title:'Trilingue',
+    { tag:'Langues', title:'3 langues de travail',
       stats:[['Français','natif'],['Anglais','courant (TOEIC 815)'],['Espagnol','B2']] },
     { tag:"Centres d'intérêt", title:'En dehors du travail',
       bul:['<b>Sport</b> : squash, boxe','<b>Musique</b> : batterie depuis plus de 15 ans, production sur FL Studio','<b>Passions</b> : concerts et festivals, jeux vidéo et e-sport'] },
@@ -382,23 +409,44 @@ const ITEMS = [
       text:["Je cherche un CDI en marketing digital, CRM et data."],
       acts:[['Voir le CV complet','cv',1],['Télécharger le CV (PDF)','files/CV-Robin-Gaudu-FR.pdf'],['Me contacter','contact']] }
    ]},
- { id:'crm', cat:'Compétence', badge:['CRM'], name:'Robin Gaudu', stat:'9 000 contacts', photo:'', color:'#e5487f',
-   title:'CRM', kicker:'02 · Compétence',
+ { id:'ia', cat:'Compétence', badge:['IA'], name:'Robin Gaudu', stat:'Agents · n8n', photo:'', icon:'ia', color:'#8b3dff',
+   title:'IA et projets', kicker:'02 · Compétence et projets',
+   teaser:"L'IA générative et les agents au quotidien, avec des projets concrets expliqués un par un.",
+   sections:[
+    { tag:'Mes outils', title:"L'IA au quotidien",
+      text:["J'utilise l'IA générative et des agents pour livrer plus vite et automatiser les tâches répétitives."],
+      chips:[['Claude',1],['ChatGPT',1],['Gemini',1],['Prompting',1],['Agents IA',1],['n8n'],['Zapier / Make'],['API Claude']] },
+    { tag:'Chez Consentio', title:'IA en entreprise',
+      bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les e-mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
+    { tag:'Projet 1', title:"Agent d'offres d'emploi",
+      text:["Il lit mes alertes emploi dans Gmail, écarte les offres hors cible et note chaque offre sur 100 face à mon profil. Construit dans Claude puis dans n8n, il se lance seul chaque matin."],
+      stats:[['38','e-mails lus'],['52','offres extraites'],['32','offres notées']],
+      img:['img/n8n-agent-offres.webp',"Le workflow n8n, exécution du 9 novembre 2026"] },
+    { tag:'Projet 2', title:'Workflow HubSpot → IA',
+      text:["Un nouveau lead arrive dans HubSpot : n8n anonymise ses données, l'API Claude rédige un e-mail de bienvenue dans sa langue, et un brouillon est créé dans Gmail. L'IA ne reçoit ni adresse e-mail ni numéro de téléphone."],
+      steps:[['HubSpot','nouveau contact'],['n8n','anonymisation'],['Claude','rédaction'],['Gmail','brouillon à valider']] },
+    { tag:'Projet 3', title:'Agent e-mails clients',
+      text:["Il classe chaque e-mail client par sujet et urgence, lit la fiche dans le CRM et prépare une réponse dans la langue du client. Rien ne part sans validation humaine."] },
+    { tag:'Projet 4', title:'Des sites internet',
+      text:["Je sais construire un site comme celui-ci avec l'IA : idée, design, code (HTML, CSS, JavaScript) et mise en ligne gratuite sur GitHub Pages."] }
+   ]},
+ { id:'crm', cat:'Compétence', badge:['CRM'], name:'Robin Gaudu', stat:'9 000 contacts', photo:'', icon:'crm', color:'#e5487f',
+   title:'CRM', kicker:'03 · Compétence',
    teaser:"HubSpot, ActiveCampaign, segmentation, lead scoring et emailing testé en A/B.",
    sections:[
     { tag:'HubSpot · ActiveCampaign', title:'Une base automatisée',
-      text:["Chez Consentio, j'ai segmenté une base de 9 000 contacts, construit 30 workflows et mis en place le lead scoring."],
-      stats:[['9 000','contacts segmentés'],['30','workflows']] },
+      text:["Chez Consentio, j'ai segmenté une base de 9 000 contacts, construit 30 workflows et mis en place le lead scoring."],
+      stats:[['9 000','contacts segmentés et automatisés'],['30','workflows']] },
     { tag:'Emailing', title:"Ouverture doublée",
-      text:["Newsletters en français, anglais et espagnol, testées en A/B. Le taux d'ouverture est passé de 18 % à 36 %, avec suivi des clics et des conversions."] },
+      text:["Newsletters en français, anglais et espagnol, testées en A/B. Le taux d'ouverture est passé de 18 % à 36 %, avec suivi des clics et des conversions."] },
     { tag:'Ventes et clients', title:'Avec les équipes',
       text:["Suivi du pipeline commercial avec l'équipe Sales, et plus de 100 clients accompagnés lors de leur prise en main."] },
     { tag:'CRM + IA', title:"Aller plus loin avec l'IA",
-      text:["Le principe : relier le CRM à l'IA. Quand un nouveau contact arrive, un workflow lit sa fiche et prépare un mail personnalisé à sa place.",
-            "Pourquoi c'est utile : le contact reçoit une réponse plus vite, chaque message est personnalisé même en volume, et l'équipe garde son temps pour la relation. Un humain relit avant l'envoi."] }
+      text:["Le principe : relier le CRM à l'IA. Quand un nouveau contact arrive, un workflow lit sa fiche et prépare un e-mail personnalisé, que l'équipe n'a plus qu'à relire avant l'envoi.",
+            "Pourquoi c'est utile : le contact reçoit une réponse plus vite, chaque message est personnalisé même en volume, et l'équipe garde son temps pour la relation client."] }
    ]},
- { id:'data', cat:'Compétence', badge:['Data','analyste'], name:'Robin Gaudu', stat:'GA4 · GTM', photo:'', color:'#2f7cf6',
-   title:'Data analyste', kicker:'03 · Compétence',
+ { id:'data', cat:'Compétence', badge:['Data','Analytics'], name:'Robin Gaudu', stat:'GA4 · GTM', photo:'', icon:'data', color:'#2f7cf6',
+   title:'Data & Analytics', kicker:'04 · Compétence',
    teaser:"Tracking, dashboards et KPI pour transformer les chiffres en décisions marketing.",
    sections:[
     { tag:'Certifié 2026', title:'Tracking GA4 et GTM',
@@ -407,64 +455,43 @@ const ITEMS = [
       text:["Trafic, conversion, emailing et LinkedIn, construits et tenus à jour pour les équipes Produit et Sales."],
       chips:[['Looker Studio',1],['Excel avancé (TCD)',1],['SQL (bases)'],['HubSpot']] },
     { tag:'KPI', title:'Mesurer et tester',
-      bul:['Trafic, CTR, conversion','Tests A/B sur l\'emailing : ouverture de 18 % à 36 %'] },
+      bul:['Trafic, CTR, conversion','Tests A/B sur l\'emailing : ouverture de 18 % à 36 %'] },
     { tag:'Terrain', title:'Ventes et concurrence',
       text:["Chez Nous Anti-Gaspi : suivi hebdomadaire du chiffre d'affaires par gamme, analyse de la performance en rayon et benchmark concurrentiel."] },
     { tag:'Formation', title:'Analytics à l\'IPAG',
       text:["Spécialisation analytics, CRM et performance. Projets : plans de marquage GA4 / GTM, audits SEO / SEM, études de cas CRM HubSpot."] }
    ]},
- { id:'ia', cat:'Compétence', badge:['IA'], name:'Robin Gaudu', stat:'Agents · n8n', photo:'', color:'#8b3dff',
-   title:'IA', kicker:'04 · Compétence et projets',
-   teaser:"L'IA générative et les agents au quotidien, avec des projets concrets expliqués un par un.",
-   sections:[
-    { tag:'Mes outils', title:"L'IA au quotidien",
-      text:["J'utilise l'IA générative et des agents pour livrer plus vite et automatiser les tâches répétitives."],
-      chips:[['Claude',1],['ChatGPT',1],['Gemini',1],['Prompting',1],['Agents IA',1],['n8n'],['Zapier / Make'],['API Claude']] },
-    { tag:'Chez Consentio', title:'IA en entreprise',
-      bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
-    { tag:'Projet 1', title:"Agent d'offres d'emploi",
-      text:["Il lit mes alertes emploi dans Gmail, écarte les offres hors cible et note chaque offre sur 100 face à mon profil. Construit dans Claude puis dans n8n, il se lance seul chaque matin."],
-      stats:[['38','mails lus'],['52','offres extraites'],['32','offres notées']],
-      img:['img/n8n-agent-offres.webp',"Le workflow n8n, exécution du 9 novembre 2026"] },
-    { tag:'Projet 2', title:'Workflow HubSpot → IA',
-      text:["Un nouveau lead arrive dans HubSpot : n8n anonymise ses données, l'API Claude rédige un mail de bienvenue dans sa langue, et un brouillon est créé dans Gmail. L'IA ne reçoit ni e-mail ni téléphone."],
-      steps:[['HubSpot','nouveau contact'],['n8n','anonymisation'],['Claude','rédaction'],['Gmail','brouillon à valider']] },
-    { tag:'Projet 3', title:'Agent mails clients',
-      text:["Il classe chaque mail client par sujet et urgence, lit la fiche dans le CRM et prépare une réponse dans la langue du client. Rien ne part sans validation humaine."] },
-    { tag:'Projet 4', title:'Des sites internet',
-      text:["Je sais construire un site comme celui-ci avec l'IA : idée, design, code (HTML, CSS, JavaScript) et mise en ligne gratuite sur GitHub Pages."] }
-   ]},
- { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'Robin Gaudu', stat:'18 → 36 %', photo:'', color:'#0fb3a0',
+ { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'Robin Gaudu', stat:'18 → 36 %', photo:'', icon:'job', color:'#0fb3a0',
    title:'Consentio', kicker:'05 · Expérience · mars 2024 – oct. 2026',
-   teaser:'Junior Client Success & Product Marketing dans un SaaS B2B, à Madrid puis à Paris. Stage puis alternance.',
+   teaser:'Client Success & Product Marketing Junior dans un SaaS B2B, à Madrid puis à Paris. Stage puis alternance.',
    sections:[
     { tag:'Le poste', title:'Client Success et Product Marketing',
-      text:["Consentio est un SaaS B2B. J'y ai été Junior Client Success & Product Marketing, en stage puis en alternance, à Madrid puis à Paris, de mars 2024 à octobre 2026."] },
-    { tag:'CRM', title:'9 000 contacts, 30 workflows',
+      text:["Consentio est un SaaS B2B. J'y ai été Client Success & Product Marketing Junior, en stage puis en alternance, à Madrid puis à Paris, de mars 2024 à octobre 2026."] },
+    { tag:'CRM', title:'9 000 contacts, 30 workflows',
       bul:['Segmentation de la base dans HubSpot et ActiveCampaign','Lead scoring','Suivi du pipeline avec l\'équipe Sales'] },
-    { tag:'Emailing', title:"De 18 % à 36 % d'ouverture",
+    { tag:'Emailing', title:"De 18 % à 36 % d'ouverture",
       bul:['Campagnes testées en A/B','Newsletters en français, anglais et espagnol','Suivi des clics et des conversions'] },
     { tag:'Data', title:'Une vingtaine de dashboards',
       bul:['Trafic, conversion, emailing, LinkedIn','Pour les équipes Produit et Sales','Plan de marquage GTM, funnel de conversion dans GA4'] },
     { tag:'Contenu et clients', title:'LinkedIn, tutoriels, onboarding',
       bul:['Page LinkedIn de l\'entreprise : contenu, engagement, croissance de l\'audience','15 tutoriels vidéo','Plus de 100 clients accompagnés lors de leur prise en main'] },
     { tag:'IA et web', title:'Automatiser et créer',
-      bul:['Agents IA pour les mails clients et le calcul de l\'activité des clients','IA générative pour les newsletters, les tutoriels et l\'analyse de données','Landing pages Webflow reliées aux formulaires HubSpot (page fournisseurs, replay de webinaire)'] }
+      bul:['Agents IA pour les e-mails clients et le calcul de l\'activité des clients','IA générative pour les newsletters, les tutoriels et l\'analyse de données','Landing pages Webflow reliées aux formulaires HubSpot (page fournisseurs, replay de webinaire)'] }
    ]},
- { id:'nous-anti-gaspi', cat:'Expérience', badge:['Nous','Anti-Gaspi'], name:'Robin Gaudu', stat:'46 magasins', photo:'', color:'#f0a500',
+ { id:'nous-anti-gaspi', cat:'Expérience', badge:['Nous','Anti-Gaspi'], name:'Robin Gaudu', stat:'46 magasins', photo:'', icon:'job', color:'#f0a500',
    title:'Nous Anti-Gaspi', kicker:'06 · Expérience · avr. – août 2023',
-   teaser:'Commercial secteur en stage, à Paris, sur le réseau Carrefour d\'Île-de-France.',
+   teaser:'Responsable secteur et commercial en stage, sur le réseau Carrefour d\'Île-de-France.',
    sections:[
-    { tag:'Le poste', title:'Commercial secteur',
-      text:["Stage de commercial secteur chez Nous Anti-Gaspi, à Paris, d'avril à août 2023."] },
+    { tag:'Le poste', title:'Responsable secteur et commercial',
+      text:["Stage de responsable secteur et commercial chez Nous Anti-Gaspi, à Paris, d'avril à août 2023."] },
     { tag:'Déploiement', title:'46 magasins Carrefour',
       text:["J'ai activé la marque dans 46 magasins Carrefour d'Île-de-France, avec les directeurs de magasin et les chefs de rayon."] },
     { tag:'Négociation', title:'5 références par magasin',
-      text:["Des négociations en magasin qui ont permis d'implanter au moins 5 nouvelles références dans chaque point de vente."] },
+      text:["J'ai négocié en direct avec les directeurs de magasin et les chefs de rayon pour implanter au moins 5 nouvelles références dans chaque point de vente."] },
     { tag:'Analyse', title:'Ventes et concurrence',
       bul:['Suivi hebdomadaire du chiffre d\'affaires par gamme','Analyse de la performance en rayon','Benchmark concurrentiel'] }
    ]},
- { id:'louis-vuitton', cat:'Expérience', badge:['Louis','Vuitton'], name:'Robin Gaudu', stat:'Champs-Élysées', photo:'', color:'#9a5a32',
+ { id:'louis-vuitton', cat:'Expérience', badge:['Louis','Vuitton'], name:'Robin Gaudu', stat:'Champs-Élysées', photo:'', icon:'job', color:'#9a5a32',
    title:'Louis Vuitton', kicker:'07 · Expérience · mai – août 2022',
    teaser:'Vendeur et Personal Shopper en prêt-à-porter homme, en CDD, à Paris.',
    sections:[
@@ -475,7 +502,7 @@ const ITEMS = [
     { tag:'Le métier', title:'Personal Shopper',
       bul:['Un conseil sur mesure, construit autour des goûts de chaque client','Une connaissance fine de la collection pour proposer la bonne pièce','Une relation qui donne envie de revenir'] }
    ]},
- { id:'maison-nordique', cat:'Expérience', badge:['Maison','Nordique'], name:'Robin Gaudu', stat:'Produits premium', photo:'', color:'#3f6fb5',
+ { id:'maison-nordique', cat:'Expérience', badge:['Maison','Nordique'], name:'Robin Gaudu', stat:'Produits premium', photo:'', icon:'job', color:'#3f6fb5',
    title:'La Maison Nordique', kicker:'08 · Expérience · stage',
    teaser:'Vendeur et conseiller en produits gastronomiques haut de gamme, à Paris.',
    sections:[
@@ -485,12 +512,12 @@ const ITEMS = [
       text:["Conseil aux clients sur des produits gastronomiques haut de gamme."] },
     { tag:'Opérations', title:'Stocks et commandes',
       bul:['Gestion des stocks','Prise de commandes'] },
-    { tag:'Savoir-faire', title:'Une formation spécialisée',
-      text:["Formé à la découpe du saumon."] }
+    { tag:'Ce que j\'en retiens', title:'Le sens du service',
+      text:["Écouter le client, connaître parfaitement le produit et donner envie de revenir : une base que j'applique aujourd'hui au marketing client."] }
    ]},
- { id:'ce-site', cat:'Projet', badge:['Ce','site'], name:'Robin Gaudu', stat:"Fait avec l'IA", photo:'', color:'#1f9ad6',
+ { id:'ce-site', cat:'Projet', badge:['Ce','site'], name:'Robin Gaudu', stat:"Fait avec l'IA", photo:'', icon:'code', color:'#1f9ad6',
    title:'Ce site', kicker:'09 · Pourquoi ce site',
-   teaser:"Un CV dit ce que j'ai fait. Ce site le montre : mes qualités, ma motivation et mon côté créatif.",
+   teaser:"Un CV dit ce que j'ai fait. Ce site montre comment je travaille, ma motivation et mon côté créatif.",
    sections:[
     { tag:'Le but', title:'Pourquoi ce site ?',
       text:["Un CV tient sur une page. J'ai voulu aller plus loin et montrer, carte par carte, ce que je sais faire, avec les vrais chiffres de mon parcours."] },
@@ -499,15 +526,23 @@ const ITEMS = [
     { tag:'Ma motivation', title:'Aller plus loin',
       text:["J'ai construit ce site pendant ma recherche d'emploi, en apprenant à chaque étape. C'est ma façon de montrer que j'aime progresser et que je m'investis dans ce que je fais."] },
     { tag:'Mon côté créatif', title:'Une idée, un style',
-      text:["Des badges d'accès, un ciel bleu, une navigation à la molette : j'ai imaginé une présentation qui marque les esprits, conçue avec l'IA et publiée gratuitement sur GitHub Pages."] }
+      text:["Des badges d'accès, un ciel bleu, une navigation carte par carte : un format pensé pour qu'on retienne mon profil, conçu avec l'IA et publié gratuitement sur GitHub Pages."] }
    ]}
 ];
 
 /* ===================== OUTILS ===================== */
+const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICONS = {
+  crm:  ic('<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.8-3.3 3.2-5 6-5s5.2 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.2 14.2c2.3.3 4 1.9 4.8 4.8"/>'),
+  data: ic('<path d="M3 21h18"/><path d="M6 17v-5M12 17V5M18 17v-8"/>'),
+  ia:   ic('<path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>'),
+  job:  ic('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>'),
+  code: ic('<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>')
+};
 const $ = s => document.querySelector(s);
 const n = ITEMS.length;
 const HERO_ROT = -4;
-let cur = 0, sec = 0, mode = 'carousel', lock = false, lastUser = 0;
+let cur = 0, sec = 0, mode = 'carousel', lock = false, lastUser = 0, interacted = false;
 const ring = $('#ring'), hero = $('#heroCan'), panel = $('#panel'), inner = $('#panelInner'), secnav = $('#secnav');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pad2 = k => String(k).padStart(2, '0');
@@ -533,7 +568,7 @@ function canHTML(it, big){
    + `<div class="badge">`
    +   `<div class="b-face b-front"><span class="b-hole"></span>`
    +     `<div class="b-top"><span>All access · 2026</span><span>N°${num}</span></div>`
-   +     `<div class="b-photo">${it.photo ? `<img src="${it.photo}" alt="">` : `<b>RG</b><small>PHOTO</small>`}</div>`
+   +     `<div class="b-photo ${it.photo ? 'pic' : 'ico'}">${it.photo ? `<img src="${it.photo}" alt="">` : (ICONS[it.icon] || '<b>RG</b>')}</div>`
    +     `<span class="b-cat">${esc(it.cat)}</span>`
    +     `<div class="b-title" style="--fs:${fs}">${lines.map(esc).join('<br>')}</div>`
    +     `<div class="b-name">${esc(it.name)}</div>`
@@ -595,7 +630,7 @@ function caption(){
   setTimeout(() => {
     $('#capKicker').textContent = it.kicker;
     $('#capTitle').textContent = it.title;
-    $('#capTeaser').textContent = it.teaser;
+    $('#capTeaser').textContent = (innerWidth < 860 && it.short) || it.teaser;
     c.classList.remove('swap');
   }, 240);
   document.body.style.setProperty('--c', it.color);
@@ -703,7 +738,7 @@ function step(dir){
 function hold(ms){ lock = true; setTimeout(() => lock = false, ms); }
 
 /* ===================== INTERACTIONS ===================== */
-function touchUser(){ lastUser = Date.now(); }
+function touchUser(){ lastUser = Date.now(); interacted = true; }
 const overlayOpen = () => document.querySelector('.overlay.open');
 const panelCanScroll = dir => {
   if (panel.scrollHeight <= panel.clientHeight + 4) return false;
@@ -784,7 +819,7 @@ $('#logo').onclick = e => { e.preventDefault(); closeOv(); mode === 'detail' ? e
 function openOv(id){ closeOv(); const o = $('#' + id); o.classList.add('open'); o.scrollTop = 0; $('#menuBtn').setAttribute('aria-expanded', id === 'menu'); o.querySelector('[data-close]').focus({preventScroll:true}); }
 function closeOv(){ document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); $('#menuBtn').setAttribute('aria-expanded', 'false'); }
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = closeOv);
-document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openOv(b.dataset.open));
+document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { touchUser(); openOv(b.dataset.open); });
 $('#menuBtn').onclick = () => openOv('menu');
 $('#contactBtn').onclick = () => openOv('contact');
 $('#printCv').onclick = () => { try { window.print(); } catch (e) {} };
@@ -800,9 +835,9 @@ document.querySelectorAll('[data-copy]').forEach(b => b.onclick = async () => {
   setTimeout(() => b.textContent = 'Copier', 1800);
 });
 
-/* défilement automatique tant que personne ne touche */
+/* défilement automatique, seulement tant que le visiteur n'a encore rien touché */
 setInterval(() => {
-  if (mode === 'carousel' && !lock && !overlayOpen() && !document.hidden && Date.now() - lastUser > 10000) go(cur + 1);
+  if (!interacted && mode === 'carousel' && !lock && !overlayOpen() && !document.hidden && Date.now() - lastUser > 8000) go(cur + 1);
 }, 4500);
 
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (mode !== 'zoom') { layout(); fitTitles(document); } }, 150); });
@@ -811,7 +846,7 @@ let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() 
 layout(); caption();
 const start = () => {
   fitTitles(document);
-  const t0 = performance.now(), D = 1000, bar = $('#ldb');
+  const t0 = performance.now(), D = 400, bar = $('#ldb');
   (function tick(){
     const p = Math.min(1, (performance.now() - t0) / D);
     bar.style.width = (p * 100) + '%';
