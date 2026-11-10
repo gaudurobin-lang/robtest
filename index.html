@@ -115,9 +115,10 @@ a{color:inherit}
 #carousel{position:fixed;inset:0;z-index:5;transition:opacity .6s var(--soft)}
 .ring{position:absolute;left:50%;top:38%;width:0;height:0}
 .slot{position:absolute;left:0;top:0;transform-origin:center;transition:transform .9s var(--ease),opacity .6s;will-change:transform,opacity}
-.slot .bwrap{--w:clamp(140px,min(15vw,30vh),240px)}
+.slot .bwrap{--w:clamp(140px,min(15vw,30vh),240px);transform-origin:50% -60%;animation:sway 7s ease-in-out infinite;animation-delay:calc(var(--i)*-1.1s)}
+.slot.ghost .bwrap{animation:none}
 .slot.ghost{opacity:0!important;transition:none}
-@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+@keyframes sway{0%,100%{transform:rotate(0)}25%{transform:rotate(1.4deg)}75%{transform:rotate(-1.4deg)}}
 .slot:not(.is-cur):hover .bwrap{filter:brightness(1.08)}
 .arrow{position:absolute;top:38%;z-index:40;width:68px;height:68px;margin-top:-34px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink);
   box-shadow:0 10px 30px -8px rgba(15,29,51,.45),0 0 0 6px rgba(255,255,255,.35);transition:transform .25s var(--soft),background .25s,color .25s}
@@ -175,7 +176,7 @@ body.is-detail .panel{opacity:1;transition-delay:.55s}
 .bul li b{color:var(--ink)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;margin-top:20px}
 .stats div{background:color-mix(in oklab,var(--c) 9%,#fff);border-radius:14px;padding:14px}
-.stats strong{display:block;font-weight:800;font-size:clamp(24px,2.1vw,32px);line-height:1;color:color-mix(in oklab,var(--c) 75%,#000)}
+.stats strong{display:block;white-space:nowrap;font-weight:800;font-size:clamp(22px,1.9vw,30px);line-height:1;color:color-mix(in oklab,var(--c) 75%,#000)}
 .stats span{display:block;margin-top:6px;font-size:14px;color:var(--mute);line-height:1.35}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;list-style:none}
 .chips li{border:1px solid var(--line);padding:7px 12px;border-radius:99px;font-size:14.5px;font-weight:600;background:#fff}
@@ -392,29 +393,22 @@ body.loaded #loader{opacity:0;visibility:hidden}
    Photos : déposez une image dans img/ et indiquez photo:'img/nom.jpg'.
    Sans photo, le badge affiche « RG ». */
 const ITEMS = [
- { id:'cv', cat:'CV', badge:['Robin','Gaudu'], name:'Marketing digital · CRM · Data', stat:'CV complet', photo:'', color:'#6d4cff',
-   title:'Robin Gaudu', kicker:'01 · CV · Disponible immédiatement',
+ { id:'cv', cat:'Profil', badge:['Robin','Gaudu'], name:'Marketing digital · CRM · Data', stat:'CV complet', photo:'', color:'#6d4cff',
+   title:'Robin Gaudu', kicker:'01 · Profil · Disponible immédiatement',
    short:"Je recherche un CDI en CRM, data analyse ou marketing digital, avec l'IA au cœur du poste.",
    teaser:"Je recherche un CDI en CRM, data analyse ou marketing digital, avec l'IA au cœur du poste.",
    sections:[
     { tag:'Profil', title:'CRM, data et IA',
       text:["Diplômé d'un Master Digital Marketing (IPAG Business School), avec plus de 2 ans et demi chez Consentio (SaaS B2B, Madrid et Paris) en CRM, emailing et data marketing.",
             "Certifié Google Analytics et Google Tag Manager, j'utilise l'IA générative et des agents IA au quotidien pour livrer plus vite et automatiser les tâches répétitives."],
-      stats:[['18 → 36 %',"taux d'ouverture des newsletters"],['9 000','contacts segmentés et automatisés'],['30','workflows HubSpot et ActiveCampaign']] },
-    { tag:'Parcours', title:'Expériences',
-      steps:[['Consentio · Madrid et Paris','Client Success & Product Marketing Junior · stage puis alternance · mars 2024 – oct. 2026'],['Nous Anti-Gaspi · Paris','Responsable secteur et commercial · stage · avr. – août 2023'],['Louis Vuitton · Paris','Vendeur et Personal Shopper, homme · CDD · mai – août 2022'],['La Maison Nordique · Paris','Vendeur et conseiller produits premium · stage']],
-      acts:[['Consentio','go:consentio'],['Nous Anti-Gaspi','go:nous-anti-gaspi'],['Louis Vuitton','go:louis-vuitton'],['La Maison Nordique','go:maison-nordique']] },
+      stats:[['18 → 36 %',"taux d'ouverture des newsletters"],['9 000','contacts segmentés et automatisés'],['30','workflows HubSpot et ActiveCampaign']] },
     { tag:'2021 – 2026', title:'Formation',
       steps:[['IPAG Business School · 2021 – 2026','Master Programme Grande École, Digital Marketing. Spécialisation : stratégie d\'acquisition, analytics, CRM et performance. Certifications 2026 : Google Analytics, Google Tag Manager'],['Algebra University College · Zagreb · sept. 2023 – févr. 2024','3e année Marketing Digital (Erasmus) : marketing digital international, e-commerce, social media, data privacy'],['Lycée Les Petits Champs · Paris · 2021','Baccalauréat STMG']] },
-    { tag:'Compétences', title:'Outils',
-      chips:[['HubSpot',1],['ActiveCampaign',1],['GA4',1],['Google Tag Manager',1],['Looker Studio'],['Excel avancé (TCD)'],['SQL (bases)'],['SEMrush'],['Webflow'],['Canva'],['Stonly'],['Claude',1],['ChatGPT',1],['Gemini',1],['Zapier / Make'],['n8n']],
-      acts:[['Carte CRM','go:crm'],['Carte Data','go:data'],['Carte IA','go:ia']] },
-    { tag:'Langues', title:'3 langues de travail',
-      stats:[['Français','natif'],['Anglais','courant (TOEIC 815)'],['Espagnol','B2']] },
-    { tag:"Centres d'intérêt", title:'En dehors du travail',
+    { tag:'Langues et passions', title:'En dehors du CV',
+      stats:[['Français','natif'],['Anglais','courant (TOEIC 815)'],['Espagnol','B2']],
       bul:['<b>Sport</b> : squash, boxe','<b>Musique</b> : batterie depuis plus de 15 ans, production sur FL Studio','<b>Passions</b> : concerts et festivals, jeux vidéo et e-sport'] },
-    { tag:'Disponible immédiatement', title:'Mon CV complet',
-      text:["Je cherche un CDI en marketing digital, CRM et data."],
+    { tag:'Disponible immédiatement', title:'Ce que je cherche',
+      text:["Un CDI en CRM, data analyse ou marketing digital, dans une équipe où l'IA a une vraie place."],
       acts:[['Voir le CV complet','cv',1],['Télécharger le CV (PDF)','files/CV-Robin-Gaudu-FR.pdf'],['Me contacter','contact']] }
    ]},
  { id:'ia', cat:'Compétence', badge:['IA'], name:'Robin Gaudu', stat:'Agents · n8n', photo:'', icon:'ia', color:'#8b3dff',
@@ -438,99 +432,78 @@ const ITEMS = [
     { tag:'Projet 4', title:'Des sites internet',
       text:["Je sais construire un site comme celui-ci avec l'IA : idée, design, code (HTML, CSS, JavaScript) et mise en ligne gratuite sur GitHub Pages."] }
    ]},
- { id:'crm', cat:'Compétence', badge:['CRM'], name:'Robin Gaudu', stat:'9 000 contacts', photo:'', icon:'crm', color:'#e5487f',
+ { id:'crm', cat:'Compétence', badge:['CRM'], name:'Robin Gaudu', stat:'HubSpot', photo:'', icon:'crm', color:'#e5487f',
    title:'CRM', kicker:'03 · Compétence',
-   teaser:"HubSpot, ActiveCampaign, segmentation, lead scoring et emailing testé en A/B.",
+   teaser:"Une base propre, des parcours automatisés et des e-mails qui donnent envie d'ouvrir.",
    sections:[
-    { tag:'HubSpot · ActiveCampaign', title:'Une base automatisée',
-      text:["Chez Consentio, j'ai segmenté une base de 9 000 contacts, construit 30 workflows et mis en place le lead scoring."],
-      stats:[['9 000','contacts segmentés et automatisés'],['30','workflows']] },
-    { tag:'Emailing', title:"Ouverture doublée",
-      text:["Newsletters en français, anglais et espagnol, testées en A/B. Le taux d'ouverture est passé de 18 % à 36 %, avec suivi des clics et des conversions."] },
-    { tag:'Ventes et clients', title:'Avec les équipes',
-      text:["Suivi du pipeline commercial avec l'équipe Sales, et plus de 100 clients accompagnés lors de leur prise en main."] },
+    { tag:'HubSpot · ActiveCampaign', title:'Une base qui travaille',
+      text:["Je segmente les contacts, je mets en place le lead scoring et je construis des workflows qui envoient le bon message au bon moment. Le pipeline est suivi avec les équipes Sales."] },
+    { tag:'Emailing', title:'Tester, mesurer, garder',
+      text:["Je teste les campagnes en A/B (objet, contenu, langue) et je suis l'ouverture, les clics et la conversion pour garder ce qui marche."],
+      stats:[['18 → 36 %',"taux d'ouverture obtenu chez Consentio"]] },
     { tag:'CRM + IA', title:"Aller plus loin avec l'IA",
       text:["Le principe : relier le CRM à l'IA. Quand un nouveau contact arrive, un workflow lit sa fiche et prépare un e-mail personnalisé, que l'équipe n'a plus qu'à relire avant l'envoi.",
             "Pourquoi c'est utile : le contact reçoit une réponse plus vite, chaque message est personnalisé même en volume, et l'équipe garde son temps pour la relation client."] }
    ]},
  { id:'data', cat:'Compétence', badge:['Data','Analytics'], name:'Robin Gaudu', stat:'GA4 · GTM', photo:'', icon:'data', color:'#2f7cf6',
    title:'Data & Analytics', kicker:'04 · Compétence',
-   teaser:"Tracking, dashboards et KPI pour transformer les chiffres en décisions marketing.",
+   teaser:"Mesurer ce qui compte, le rendre lisible, puis décider à partir des chiffres.",
    sections:[
     { tag:'Certifié 2026', title:'Tracking GA4 et GTM',
-      text:["Certifié Google Analytics et Google Tag Manager. Chez Consentio : plan de marquage GTM et analyse du funnel de conversion dans GA4."] },
-    { tag:'Reporting', title:'Une vingtaine de dashboards',
-      text:["Trafic, conversion, emailing et LinkedIn, construits et tenus à jour pour les équipes Produit et Sales."],
+      text:["Certifié Google Analytics et Google Tag Manager. Je construis le plan de marquage pour mesurer ce qui compte, puis j'analyse le tunnel de conversion dans GA4."] },
+    { tag:'Reporting', title:'Des dashboards utiles',
+      text:["Des tableaux de bord simples, tenus à jour, que les équipes Produit et Sales consultent vraiment : trafic, conversion, emailing, LinkedIn."],
       chips:[['Looker Studio',1],['Excel avancé (TCD)',1],['SQL (bases)'],['HubSpot']] },
-    { tag:'KPI', title:'Mesurer et tester',
-      bul:['Trafic, CTR, conversion','Tests A/B sur l\'emailing : ouverture de 18 % à 36 %'] },
-    { tag:'Terrain', title:'Ventes et concurrence',
-      text:["Chez Nous Anti-Gaspi : suivi hebdomadaire du chiffre d'affaires par gamme, analyse de la performance en rayon et benchmark concurrentiel."] },
-    { tag:'Formation', title:'Analytics à l\'IPAG',
-      text:["Spécialisation analytics, CRM et performance. Projets : plans de marquage GA4 / GTM, audits SEO / SEM, études de cas CRM HubSpot."] }
+    { tag:'KPI', title:'Décider avec les chiffres',
+      text:["Je choisis peu d'indicateurs, mais les bons : trafic, taux de clic, conversion. Avant de changer une campagne, je teste en A/B."] }
    ]},
- { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'Robin Gaudu', stat:'18 → 36 %', photo:'', icon:'job', color:'#0fb3a0',
+ { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'Robin Gaudu', stat:'18 → 36 %', photo:'', icon:'job', color:'#0fb3a0',
    title:'Consentio', kicker:'05 · Expérience · mars 2024 – oct. 2026',
    teaser:'Client Success & Product Marketing Junior dans un SaaS B2B, à Madrid puis à Paris. Stage puis alternance.',
    sections:[
     { tag:'Le poste', title:'Client Success et Product Marketing',
       text:["Consentio est un SaaS B2B. J'y ai été Client Success & Product Marketing Junior, en stage puis en alternance, à Madrid puis à Paris, de mars 2024 à octobre 2026."] },
-    { tag:'CRM', title:'9 000 contacts, 30 workflows',
-      bul:['Segmentation de la base dans HubSpot et ActiveCampaign','Lead scoring','Suivi du pipeline avec l\'équipe Sales'] },
-    { tag:'Emailing', title:"De 18 % à 36 % d'ouverture",
-      bul:['Campagnes testées en A/B','Newsletters en français, anglais et espagnol','Suivi des clics et des conversions'] },
+    { tag:'CRM et emailing', title:'Les résultats',
+      stats:[['9 000','contacts segmentés'],['30','workflows HubSpot et ActiveCampaign'],['18 → 36 %',"taux d'ouverture"]],
+      bul:['Lead scoring et suivi du pipeline avec les Sales','Newsletters en français, anglais et espagnol, testées en A/B'] },
     { tag:'Data', title:'Une vingtaine de dashboards',
-      bul:['Trafic, conversion, emailing, LinkedIn','Pour les équipes Produit et Sales','Plan de marquage GTM, funnel de conversion dans GA4'] },
+      text:["Trafic, conversion, emailing et LinkedIn, pour les équipes Produit et Sales. J'ai aussi construit le plan de marquage GTM et analysé le tunnel de conversion dans GA4."] },
     { tag:'Contenu et clients', title:'LinkedIn, tutoriels, onboarding',
       bul:['Page LinkedIn de l\'entreprise : contenu, engagement, croissance de l\'audience','15 tutoriels vidéo','Plus de 100 clients accompagnés lors de leur prise en main'] },
-    { tag:'IA et web', title:'Automatiser et créer',
-      bul:['Agents IA pour les e-mails clients et le calcul de l\'activité des clients','IA générative pour les newsletters, les tutoriels et l\'analyse de données','Landing pages Webflow reliées aux formulaires HubSpot (page fournisseurs, replay de webinaire)'] }
+    { tag:'Web et IA', title:'Créer et automatiser',
+      bul:['Landing pages Webflow reliées aux formulaires HubSpot (page fournisseurs, replay de webinaire)','Agents IA pour les e-mails clients et l\'activité des clients, détaillés dans la carte IA'] }
    ]},
  { id:'nous-anti-gaspi', cat:'Expérience', badge:['Nous','Anti-Gaspi'], name:'Robin Gaudu', stat:'46 magasins', photo:'', icon:'job', color:'#f0a500',
    title:'Nous Anti-Gaspi', kicker:'06 · Expérience · avr. – août 2023',
    teaser:'Responsable secteur et commercial en stage, sur le réseau Carrefour d\'Île-de-France.',
    sections:[
-    { tag:'Le poste', title:'Responsable secteur et commercial',
-      text:["Stage de responsable secteur et commercial chez Nous Anti-Gaspi, à Paris, d'avril à août 2023."] },
-    { tag:'Déploiement', title:'46 magasins Carrefour',
-      text:["J'ai activé la marque dans 46 magasins Carrefour d'Île-de-France, avec les directeurs de magasin et les chefs de rayon."] },
-    { tag:'Négociation', title:'5 références par magasin',
-      text:["J'ai négocié en direct avec les directeurs de magasin et les chefs de rayon pour implanter au moins 5 nouvelles références dans chaque point de vente."] },
+    { tag:'Le terrain', title:'46 magasins Carrefour',
+      text:["En stage de responsable secteur et commercial, j'ai activé la marque dans 46 magasins Carrefour d'Île-de-France. J'ai négocié en direct avec les directeurs et les chefs de rayon."],
+      stats:[['46','magasins activés'],['5+','nouvelles références par magasin']] },
     { tag:'Analyse', title:'Ventes et concurrence',
-      bul:['Suivi hebdomadaire du chiffre d\'affaires par gamme','Analyse de la performance en rayon','Benchmark concurrentiel'] }
+      bul:['Suivi chaque semaine du chiffre d\'affaires par gamme','Analyse de la performance en rayon','Comparaison avec les marques concurrentes'] }
    ]},
- { id:'louis-vuitton', cat:'Expérience', badge:['Louis','Vuitton'], name:'Robin Gaudu', stat:'Champs-Élysées', photo:'', icon:'job', color:'#9a5a32',
-   title:'Louis Vuitton', kicker:'07 · Expérience · mai – août 2022',
-   teaser:'Vendeur et Personal Shopper en prêt-à-porter homme, en CDD, à Paris.',
+ { id:'retail-premium', cat:'Expériences', badge:['Retail','premium'], name:'Louis Vuitton · La Maison Nordique', stat:'Relation client', photo:'', icon:'job', color:'#9a5a32',
+   title:'Relation client premium', kicker:'07 · Expériences · Louis Vuitton et La Maison Nordique',
+   teaser:'Deux expériences de vente haut de gamme à Paris, où j\'ai appris le service client exigeant.',
    sections:[
-    { tag:'Le poste', title:'Personal Shopper homme',
-      text:["Vendeur et Personal Shopper en prêt-à-porter homme, en CDD, de mai à août 2022."] },
-    { tag:'Pop-up store', title:'Champs-Élysées',
-      text:["Au pop-up store des Champs-Élysées, autour de la collection Virgil Abloh, j'ai conseillé une clientèle internationale haut de gamme."] },
-    { tag:'Le métier', title:'Personal Shopper',
-      bul:['Un conseil sur mesure, construit autour des goûts de chaque client','Une connaissance fine de la collection pour proposer la bonne pièce','Une relation qui donne envie de revenir'] }
-   ]},
- { id:'maison-nordique', cat:'Expérience', badge:['Maison','Nordique'], name:'Robin Gaudu', stat:'Produits premium', photo:'', icon:'job', color:'#3f6fb5',
-   title:'La Maison Nordique', kicker:'08 · Expérience · stage',
-   teaser:'Vendeur et conseiller en produits gastronomiques haut de gamme, à Paris.',
-   sections:[
-    { tag:'Le poste', title:'Vendeur et conseiller',
-      text:["Stage de vendeur et conseiller en produits premium à La Maison Nordique, à Paris."] },
-    { tag:'Conseil', title:'Gastronomie haut de gamme',
-      text:["Conseil aux clients sur des produits gastronomiques haut de gamme."] },
-    { tag:'Opérations', title:'Stocks et commandes',
-      bul:['Gestion des stocks','Prise de commandes'] },
-    { tag:'Ce que j\'en retiens', title:'Le sens du service',
-      text:["Écouter le client, connaître parfaitement le produit et donner envie de revenir : une base que j'applique aujourd'hui au marketing client."] }
+    { tag:'Louis Vuitton · mai – août 2022', title:'Personal Shopper homme',
+      text:["En CDD, au pop-up store des Champs-Élysées (collection Virgil Abloh), j'ai conseillé une clientèle internationale haut de gamme en prêt-à-porter homme."],
+      bul:['Un conseil sur mesure, construit autour des goûts de chaque client','Une connaissance fine de la collection pour proposer la bonne pièce'] },
+    { tag:'La Maison Nordique · stage', title:'Vendeur et conseiller',
+      text:["Une autre maison, un autre univers : les produits gastronomiques haut de gamme, à Paris."],
+      bul:['Conseil aux clients','Gestion des stocks et prise de commandes'] },
+    { tag:'Ce que j\'en retiens', title:'Le sens du client',
+      text:["Écouter, connaître parfaitement le produit et donner envie de revenir : la même logique que le CRM, mais en face à face."] }
    ]},
  { id:'ce-site', cat:'Projet', badge:['Ce','site'], name:'Robin Gaudu', stat:"Fait avec l'IA", photo:'', icon:'code', color:'#1f9ad6',
-   title:'Ce site', kicker:'09 · Pourquoi ce site',
+   title:'Ce site', kicker:'08 · Pourquoi ce site',
    teaser:"Un CV dit ce que j'ai fait. Ce site montre comment je travaille, ma motivation et mon côté créatif.",
    sections:[
     { tag:'Le but', title:'Pourquoi ce site ?',
       text:["Un CV tient sur une page. J'ai voulu aller plus loin et montrer, carte par carte, ce que je sais faire, avec les vrais chiffres de mon parcours."] },
     { tag:'Mes qualités', title:'Montrer plutôt que dire',
-      text:["Chaque carte présente une compétence ou une expérience : CRM, data, IA, et ce que j'ai accompli chez Consentio, Nous Anti-Gaspi, Louis Vuitton et La Maison Nordique."] },
+      text:["Chaque carte présente une compétence (IA, CRM, data) ou une expérience, avec ce que j'y ai concrètement accompli."] },
     { tag:'Ma motivation', title:'Aller plus loin',
       text:["J'ai construit ce site pendant ma recherche d'emploi, en apprenant à chaque étape. C'est ma façon de montrer que j'aime progresser et que je m'investis dans ce que je fais."] },
     { tag:'Mon côté créatif', title:'Une idée, un style',
@@ -656,7 +629,9 @@ function flipFrom(slot){
   const s = (c.offsetHeight * t.sc) / hw.offsetHeight;
   const dx = (r.left + r.width / 2) - (hc.left + hc.width / 2);
   const dy = (r.top + r.height / 2) - (hc.top + hc.height / 2);
-  return `translate(${dx}px,${dy}px) scale(${s}) rotate(${t.r}deg)`;
+  const m = new DOMMatrix(getComputedStyle(c).transform);
+  const sway = Math.atan2(m.b, m.a) * 180 / Math.PI;
+  return `translate(${dx}px,${dy}px) scale(${s}) rotate(${t.r + sway}deg)`;
 }
 
 function enter(k){
@@ -696,6 +671,7 @@ function exit(then){
   setTimeout(() => {
     const sl = slots[cur];
     sl.style.transition = 'none';
+    sl.querySelector('.bwrap').style.animationDelay = '0s';
     sl.classList.remove('ghost');
     hero.classList.remove('on'); hero.style.transition = 'none'; hero.style.transform = '';
     void sl.offsetWidth; sl.style.transition = '';
@@ -713,8 +689,8 @@ function sectionHTML(s){
   h += s.avant ? `<p class="tag"><i>×</i><s>${esc(s.avant)}</s></p>` : `<p class="tag"><i>+</i><span>${esc(s.tag)}</span></p>`;
   h += `<h2>${esc(s.title)}</h2>`;
   if (s.text) h += [].concat(s.text).map(t => `<p class="txt">${esc(t)}</p>`).join('');
-  if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
   if (s.stats) h += `<div class="stats">${s.stats.map(([a,b]) => `<div><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`).join('')}</div>`;
+  if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
   if (s.steps) h += `<ol class="steps">${s.steps.map(([a,b]) => `<li><span>${esc(a)}${b ? `<small>${esc(b)}</small>` : ''}</span></li>`).join('')}</ol>`;
   if (s.chips) h += `<ul class="chips">${s.chips.map(([x,hl]) => `<li class="${hl ? 'hl' : ''}">${esc(x)}</li>`).join('')}</ul>`;
   if (s.code) h += `<pre class="code">${s.code.replace(/&/g,'&amp;').replace(/<(?!\/?em>)/g,'&lt;')}</pre>`;
