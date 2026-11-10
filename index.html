@@ -393,7 +393,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
    Photos : déposez une image dans img/ et indiquez photo:'img/nom.jpg'.
    Sans photo, le badge affiche « RG ». */
 const ITEMS = [
- { id:'cv', cat:'Profil', badge:['Robin','Gaudu'], name:'Marketing digital · CRM · Data', stat:'CV complet', photo:'', color:'#6d4cff',
+ { id:'cv', cat:'Profil', badge:['Robin','Gaudu'], name:'Marketing digital · CRM · Data', stat:'CV complet', photo:'img/robin-photo.jpg', color:'#6d4cff',
    title:'Robin Gaudu', kicker:'01 · Profil · Disponible immédiatement',
    short:"Je recherche un CDI en CRM, data analyse ou marketing digital, avec l'IA au cœur du poste.",
    teaser:"Je recherche un CDI en CRM, data analyse ou marketing digital, avec l'IA au cœur du poste.",
@@ -411,7 +411,7 @@ const ITEMS = [
       text:["Un CDI en CRM, data analyse ou marketing digital, dans une équipe où l'IA a une vraie place."],
       acts:[['Voir le CV complet','cv',1],['Télécharger le CV (PDF)','files/CV-Robin-Gaudu-FR.pdf'],['Me contacter','contact']] }
    ]},
- { id:'ia', cat:'Compétence', badge:['IA'], name:'Robin Gaudu', stat:'Agents · n8n', photo:'', icon:'ia', color:'#8b3dff',
+ { id:'ia', cat:'Compétence', badge:['IA'], name:'Agents et automatisation', stat:'4 projets', photo:'', icon:'ia', color:'#8b3dff',
    title:'IA et projets', kicker:'02 · Compétence et projets',
    teaser:"L'IA générative et les agents au quotidien, avec des projets concrets expliqués un par un.",
    sections:[
@@ -432,7 +432,7 @@ const ITEMS = [
     { tag:'Projet 4', title:'Des sites internet',
       text:["Je sais construire un site comme celui-ci avec l'IA : idée, design, code (HTML, CSS, JavaScript) et mise en ligne gratuite sur GitHub Pages."] }
    ]},
- { id:'crm', cat:'Compétence', badge:['CRM'], name:'Robin Gaudu', stat:'HubSpot', photo:'', icon:'crm', color:'#e5487f',
+ { id:'crm', cat:'Compétence', badge:['CRM'], name:'HubSpot · ActiveCampaign', stat:'Emailing A/B', photo:'', icon:'crm', color:'#e5487f',
    title:'CRM', kicker:'03 · Compétence',
    teaser:"Une base propre, des parcours automatisés et des e-mails qui donnent envie d'ouvrir.",
    sections:[
@@ -445,7 +445,7 @@ const ITEMS = [
       text:["Le principe : relier le CRM à l'IA. Quand un nouveau contact arrive, un workflow lit sa fiche et prépare un e-mail personnalisé, que l'équipe n'a plus qu'à relire avant l'envoi.",
             "Pourquoi c'est utile : le contact reçoit une réponse plus vite, chaque message est personnalisé même en volume, et l'équipe garde son temps pour la relation client."] }
    ]},
- { id:'data', cat:'Compétence', badge:['Data','Analytics'], name:'Robin Gaudu', stat:'GA4 · GTM', photo:'', icon:'data', color:'#2f7cf6',
+ { id:'data', cat:'Compétence', badge:['Data','Analytics'], name:'Tracking · Dashboards · KPI', stat:'GA4 · GTM', photo:'', icon:'data', color:'#2f7cf6',
    title:'Data & Analytics', kicker:'04 · Compétence',
    teaser:"Mesurer ce qui compte, le rendre lisible, puis décider à partir des chiffres.",
    sections:[
@@ -457,7 +457,7 @@ const ITEMS = [
     { tag:'KPI', title:'Décider avec les chiffres',
       text:["Je choisis peu d'indicateurs, mais les bons : trafic, taux de clic, conversion. Avant de changer une campagne, je teste en A/B."] }
    ]},
- { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'Robin Gaudu', stat:'18 → 36 %', photo:'', icon:'job', color:'#0fb3a0',
+ { id:'consentio', cat:'Expérience', badge:['Consentio'], name:'SaaS B2B · Madrid et Paris', stat:'18 → 36 %', photo:'', icon:'job', color:'#0fb3a0',
    title:'Consentio', kicker:'05 · Expérience · mars 2024 – oct. 2026',
    teaser:'Client Success & Product Marketing Junior dans un SaaS B2B, à Madrid puis à Paris. Stage puis alternance.',
    sections:[
@@ -473,7 +473,7 @@ const ITEMS = [
     { tag:'Web et IA', title:'Créer et automatiser',
       bul:['Landing pages Webflow reliées aux formulaires HubSpot (page fournisseurs, replay de webinaire)','Agents IA pour les e-mails clients et l\'activité des clients, détaillés dans la carte IA'] }
    ]},
- { id:'nous-anti-gaspi', cat:'Expérience', badge:['Nous','Anti-Gaspi'], name:'Robin Gaudu', stat:'46 magasins', photo:'', icon:'job', color:'#f0a500',
+ { id:'nous-anti-gaspi', cat:'Expérience', badge:['Nous','Anti-Gaspi'], name:'Responsable secteur · Carrefour', stat:'46 magasins', photo:'', icon:'job', color:'#f0a500',
    title:'Nous Anti-Gaspi', kicker:'06 · Expérience · avr. – août 2023',
    teaser:'Responsable secteur et commercial en stage, sur le réseau Carrefour d\'Île-de-France.',
    sections:[
@@ -496,7 +496,7 @@ const ITEMS = [
     { tag:'Ce que j\'en retiens', title:'Le sens du client',
       text:["Écouter, connaître parfaitement le produit et donner envie de revenir : la même logique que le CRM, mais en face à face."] }
    ]},
- { id:'ce-site', cat:'Projet', badge:['Ce','site'], name:'Robin Gaudu', stat:"Fait avec l'IA", photo:'', icon:'code', color:'#1f9ad6',
+ { id:'ce-site', cat:'Projet', badge:['Ce','site'], name:"Conçu avec l'IA", stat:'GitHub Pages', photo:'', icon:'code', color:'#1f9ad6',
    title:'Ce site', kicker:'08 · Pourquoi ce site',
    teaser:"Un CV dit ce que j'ai fait. Ce site montre comment je travaille, ma motivation et mon côté créatif.",
    sections:[
@@ -558,7 +558,7 @@ function canHTML(it, big){
    + (big ? `<div class="b-face b-back"><span class="b-hole"></span><h4>Au programme · N°${num}</h4>`
    +     `<div class="b-title" style="--fs:${Math.min(1.5, 9 / L).toFixed(2)}">${lines.map(esc).join('<br>')}</div>`
    +     `<ol class="face">${it.sections.map(s => `<li><span>${esc(s.title)}</span></li>`).join('')}</ol>`
-   +     `<div class="b-foot"><span class="b-stat">Robin Gaudu</span><span class="b-bar"></span></div></div>` : '')
+   +     `<div class="b-foot"><span class="b-stat">${esc(it.stat)}</span><span class="b-bar"></span></div></div>` : '')
    + `</div></div>`;
 }
 
