@@ -185,6 +185,19 @@ body.is-detail .panel{opacity:1;transition-delay:.55s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;font-size:clamp(15.5px,1.12vw,17.5px);line-height:1.45}
 .steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;font-size:13px}
 .steps li small{display:block;color:var(--mute);font-size:.88em}
+.vid{margin:18px auto 4px;width:min(100%,calc(min(62vh,560px) * 9 / 16));border-radius:16px;overflow:hidden;background:#0f1d33;box-shadow:0 18px 40px -20px rgba(15,29,51,.6)}
+.vid video{display:block;width:100%;aspect-ratio:9/16;height:auto;background:#0f1d33}
+.vid figcaption{font-size:13px;color:var(--mute);padding:8px 12px;background:#fff;text-align:center}
+.cap-h{display:inline-flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
+.play{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 10px;border-radius:999px;background:var(--c,#6d4cff);color:#fff;font:700 15px/1 var(--sans);letter-spacing:0;box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000);transition:transform .25s var(--soft),box-shadow .25s;animation:playPulse 2.4s ease-in-out infinite}
+.play svg{width:26px;height:26px;padding:5px;border-radius:50%;background:rgba(255,255,255,.22)}
+.play:hover{transform:scale(1.06)}
+.play[hidden]{display:none}
+@keyframes playPulse{0%,100%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 0 color-mix(in oklab,var(--c,#6d4cff) 45%,transparent)}50%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 10px transparent}}
+@media (prefers-reduced-motion:reduce){.play{animation:none}}
+.face li{cursor:pointer}
+body.is-detail .face li:not(.on):hover{background:rgba(255,255,255,.18);color:#fff}
+.face li:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .shot{display:block;margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 30px -18px rgba(15,29,51,.5);text-decoration:none}
 .shot img{display:block;width:100%;height:auto}
 .shot figcaption{font-size:13px;color:var(--mute);padding:8px 12px;background:#fff}
@@ -333,7 +346,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
     <button class="arrow next" id="nextBtn" aria-label="Carte suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg><small>Suivante</small></button>
     <div class="caption" id="caption">
       <p class="kicker mono" id="capKicker"></p>
-      <h1 id="capTitle"></h1>
+      <h1 class="cap-h"><span id="capTitle"></span><button class="play" id="capPlay" hidden aria-label="Voir la vidéo du projet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Vidéo</span></button></h1>
       <p class="teaser" id="capTeaser"></p>
       <div class="cta"><button class="btn solid" data-open="cv">Voir mon CV</button><button class="btn" data-open="contact">Me contacter</button></div>
     </div>
@@ -411,7 +424,7 @@ const ITEMS = [
       text:["Un CDI en CRM, data analyse ou marketing digital, dans une équipe où l'IA a une vraie place."],
       acts:[['Voir le CV complet','cv',1],['Télécharger le CV (PDF)','files/CV-Robin-Gaudu-FR.pdf'],['Me contacter','contact']] }
    ]},
- { id:'ia', cat:'Compétence', badge:['IA'], name:'Agents et automatisation', stat:'4 projets', photo:'', icon:'ia', color:'#8b3dff',
+ { id:'ia', cat:'Compétence', badge:['IA'], name:'Agents et automatisation', stat:'4 projets', photo:'', icon:'ia', color:'#8b3dff', videoSec:2,
    title:'IA et projets', kicker:'02 · Compétence et projets',
    teaser:"L'IA générative et les agents au quotidien, avec des projets concrets expliqués un par un.",
    sections:[
@@ -420,7 +433,7 @@ const ITEMS = [
       chips:[['Claude',1],['ChatGPT',1],['Gemini',1],['Prompting',1],['Agents IA',1],['n8n'],['Zapier / Make'],['API Claude']] },
     { tag:'Chez Consentio', title:'IA en entreprise',
       bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les e-mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
-    { tag:'Projet 1', title:"Agent d'offres d'emploi",
+    { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes"],
       text:["Il lit mes alertes emploi dans Gmail, écarte les offres hors cible et note chaque offre sur 100 face à mon profil. Construit dans Claude puis dans n8n, il se lance seul chaque matin."],
       stats:[['38','e-mails lus'],['52','offres extraites'],['32','offres notées']],
       img:['img/n8n-agent-offres.webp',"Le workflow n8n, exécution du 9 novembre 2026"] },
@@ -523,7 +536,7 @@ const ICONS = {
 const $ = s => document.querySelector(s);
 const n = ITEMS.length;
 const HERO_ROT = -4;
-let cur = 0, sec = 0, mode = 'carousel', lock = false, lastUser = 0, interacted = false;
+let cur = 0, sec = 0, mode = 'carousel', lock = false, lastUser = 0, interacted = false, startSec = 0, autoPlay = false;
 const ring = $('#ring'), hero = $('#heroCan'), panel = $('#panel'), inner = $('#panelInner'), secnav = $('#secnav');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pad2 = k => String(k).padStart(2, '0');
@@ -557,7 +570,7 @@ function canHTML(it, big){
    +   `</div>`
    + (big ? `<div class="b-face b-back"><span class="b-hole"></span><h4>Au programme · N°${num}</h4>`
    +     `<div class="b-title" style="--fs:${Math.min(1.5, 9 / L).toFixed(2)}">${lines.map(esc).join('<br>')}</div>`
-   +     `<ol class="face">${it.sections.map(s => `<li><span>${esc(s.title)}</span></li>`).join('')}</ol>`
+   +     `<ol class="face">${it.sections.map(s => `<li role="button" tabindex="0" aria-label="Aller à : ${esc(s.title)}"><span>${esc(s.title)}</span></li>`).join('')}</ol>`
    +     `<div class="b-foot"><span class="b-stat">${esc(it.stat)}</span><span class="b-bar"></span></div></div>` : '')
    + `</div></div>`;
 }
@@ -610,6 +623,7 @@ function caption(){
   setTimeout(() => {
     $('#capKicker').textContent = it.kicker;
     $('#capTitle').textContent = it.title;
+    $('#capPlay').hidden = typeof it.videoSec !== 'number';
     $('#capTeaser').textContent = (innerWidth < 860 && it.short) || it.teaser;
     c.classList.remove('swap');
   }, 240);
@@ -650,7 +664,8 @@ function enter(k){
   requestAnimationFrame(() => { hero.style.transform = `rotate(${HERO_ROT}deg)`; });
   document.body.classList.add('is-detail');
   secnav.innerHTML = it.sections.map((s, i) => `<button aria-label="${esc(s.title)}" data-s="${i}">${pad2(i + 1)}</button>`).join('');
-  sec = 0; render(true);
+  sec = Math.min(startSec, it.sections.length - 1); startSec = 0; render(true);
+  if (autoPlay) { autoPlay = false; setTimeout(playVideo, 1150); }
   history.replaceState(null, '', '#' + it.id);
   setTimeout(() => { mode = 'detail'; lock = false; }, 1050);
 }
@@ -689,6 +704,7 @@ function sectionHTML(s){
   h += s.avant ? `<p class="tag"><i>×</i><s>${esc(s.avant)}</s></p>` : `<p class="tag"><i>+</i><span>${esc(s.tag)}</span></p>`;
   h += `<h2>${esc(s.title)}</h2>`;
   if (s.text) h += [].concat(s.text).map(t => `<p class="txt">${esc(t)}</p>`).join('');
+  if (s.video) h += `<figure class="vid"><video controls playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video><figcaption>${esc(s.video[2])}</figcaption></figure>`;
   if (s.stats) h += `<div class="stats">${s.stats.map(([a,b]) => `<div><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`).join('')}</div>`;
   if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
   if (s.steps) h += `<ol class="steps">${s.steps.map(([a,b]) => `<li><span>${esc(a)}${b ? `<small>${esc(b)}</small>` : ''}</span></li>`).join('')}</ol>`;
@@ -792,6 +808,25 @@ $('#nextBtn').onclick = () => { touchUser(); go(cur + 1); };
 $('#backBtn').onclick = () => exit();
 $('#hopPrev').onclick = () => hop(-1);
 $('#hopNext').onclick = () => hop(1);
+function playVideo(){
+  const v = inner.querySelector('.vid video'); if (!v) return;
+  v.closest('.vid').scrollIntoView({ block:'center', behavior:'smooth' });
+  const p = v.play(); if (p && p.catch) p.catch(() => {});
+}
+$('#capPlay').addEventListener('click', e => {
+  e.stopPropagation(); touchUser();
+  const it = ITEMS[cur]; if (typeof it.videoSec !== 'number' || lock || mode !== 'carousel') return;
+  startSec = it.videoSec; autoPlay = true; enter();
+});
+hero.addEventListener('click', e => {
+  const li = e.target.closest('.face li'); if (!li || mode !== 'detail' || lock) return;
+  const i = [...li.parentNode.children].indexOf(li); if (i === sec) return;
+  touchUser(); sec = i; render(); hold(450);
+});
+hero.addEventListener('keydown', e => {
+  const li = e.target.closest('.face li'); if (!li || (e.key !== 'Enter' && e.key !== ' ')) return;
+  e.preventDefault(); li.click();
+});
 secnav.addEventListener('click', e => { const b = e.target.closest('button'); if (!b || lock) return; sec = +b.dataset.s; render(); hold(450); });
 inner.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if (!b) return;
