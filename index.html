@@ -185,14 +185,15 @@ body.is-detail .panel{opacity:1;transition-delay:.55s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;font-size:clamp(15.5px,1.12vw,17.5px);line-height:1.45}
 .steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;font-size:13px}
 .steps li small{display:block;color:var(--mute);font-size:.88em}
-.vsplit{display:grid;grid-template-columns:min(44%,max(150px,calc((100vh - 2 * var(--pad) - 400px) * 9 / 16))) 1fr;gap:clamp(16px,1.6vw,24px);align-items:start;margin-top:4px}
-.vid{margin:0;border-radius:16px;overflow:hidden;background:#0f1d33;box-shadow:0 18px 40px -20px rgba(15,29,51,.6)}
-.vid video{display:block;width:100%;aspect-ratio:9/16;height:auto;background:#0f1d33}
-.vside p.txt{font-size:clamp(15px,1.08vw,17px);line-height:1.55}
-.vside .stats{grid-template-columns:1fr;gap:8px;margin-top:14px}
-.vside .stats div{display:flex;align-items:baseline;gap:10px;padding:10px 14px}
-.vside .stats span{margin-top:0}
-.panel h2.h-vid{font-size:clamp(26px,2.5vw,40px);margin-bottom:14px}
+.vid{--vh:max(280px,calc(100vh - 2 * var(--pad) - 336px));position:relative;margin:6px auto 0;height:var(--vh);width:calc(var(--vh) * 9 / 16);max-width:100%;border-radius:18px;overflow:hidden;background:#0f1d33;box-shadow:0 24px 50px -22px color-mix(in oklab,var(--c) 70%,#0f1d33),0 0 0 1px rgba(15,29,51,.06)}
+.vid video{display:block;width:100%;height:100%;object-fit:cover;background:#0f1d33}
+.vplay{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(15,29,51,0) 40%,rgba(15,29,51,.35));cursor:pointer;transition:opacity .3s}
+.vplay svg{width:78px;height:78px;padding:20px 18px 20px 22px;border-radius:50%;background:var(--c);color:#fff;box-shadow:0 12px 30px -8px rgba(15,29,51,.6),0 0 0 8px rgba(255,255,255,.35);transition:transform .25s var(--soft)}
+.vplay:hover svg{transform:scale(1.08)}
+.vid.on .vplay{opacity:0;pointer-events:none}
+.panel h2.h-vid{font-size:clamp(26px,2.5vw,40px);margin-bottom:14px;text-align:center}
+.panel .inner:has(.vid) .p-kicker{justify-content:center}
+.panel .inner:has(.vid) .tag{display:none}
 .cap-h{display:inline-flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
 .play{pointer-events:auto;position:relative;top:.1em;display:inline-flex;align-items:center;gap:7px;padding:6px 15px 6px 7px;border-radius:999px;background:var(--c,#6d4cff);color:#fff;font:700 15px/1 var(--sans);letter-spacing:0;box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000);transition:transform .25s var(--soft),box-shadow .25s;animation:playPulse 2.4s ease-in-out infinite}
 .play svg{width:24px;height:24px;padding:5px;border-radius:50%;background:rgba(255,255,255,.22)}
@@ -323,8 +324,7 @@ body.loaded #loader{opacity:0;visibility:hidden}
   .d-top .pill{padding:7px 12px;font-size:12px}
   .d-bot{left:10px;right:10px;bottom:16px;justify-content:space-between}
   .d-hint{display:none}
-  .vsplit{grid-template-columns:1fr}
-  .vid{width:min(100%,calc((100vh - 470px) * 9 / 16),calc((100dvh - 470px) * 9 / 16));min-width:160px;margin:0 auto}
+  .vid{--vh:max(280px,calc(100dvh - 460px))}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.2s!important}
@@ -440,9 +440,7 @@ const ITEMS = [
       chips:[['Claude',1],['ChatGPT',1],['Gemini',1],['Prompting',1],['Agents IA',1],['n8n'],['Zapier / Make'],['API Claude']] },
     { tag:'Chez Consentio', title:'IA en entreprise',
       bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les e-mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
-    { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes"],
-      text:["Il lit mes alertes emploi dans Gmail, écarte les offres hors cible et note chaque offre sur 100 face à mon profil. Construit dans Claude puis dans n8n, il se lance seul chaque matin."],
-      stats:[['38','e-mails lus'],['52','offres extraites'],['32','offres notées']] },
+    { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes"], },
     { tag:'Projet 2', title:'Workflow HubSpot → IA',
       text:["Un nouveau lead arrive dans HubSpot : n8n anonymise ses données, l'API Claude rédige un e-mail de bienvenue dans sa langue, et un brouillon est créé dans Gmail. L'IA ne reçoit ni adresse e-mail ni numéro de téléphone."],
       steps:[['HubSpot','nouveau contact'],['n8n','anonymisation'],['Claude','rédaction'],['Gmail','brouillon à valider']] },
@@ -709,10 +707,9 @@ function sectionHTML(s){
   let h = `<p class="p-kicker mono"><b>${esc(it.title)}</b> · ${pad2(sec + 1)} / ${pad2(it.sections.length)}</p>`;
   h += s.avant ? `<p class="tag"><i>×</i><s>${esc(s.avant)}</s></p>` : `<p class="tag"><i>+</i><span>${esc(s.tag)}</span></p>`;
   h += `<h2${s.video ? ' class="h-vid"' : ''}>${esc(s.title)}</h2>`;
-  if (s.video) h += `<div class="vsplit"><figure class="vid"><video controls playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video></figure><div class="vside">`;
+  if (s.video) h += `<figure class="vid"><video playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video><button class="vplay" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button></figure>`;
   if (s.text) h += [].concat(s.text).map(t => `<p class="txt">${esc(t)}</p>`).join('');
   if (s.stats) h += `<div class="stats">${s.stats.map(([a,b]) => `<div><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`).join('')}</div>`;
-  if (s.video) h += `</div></div>`;
   if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
   if (s.steps) h += `<ol class="steps">${s.steps.map(([a,b]) => `<li><span>${esc(a)}${b ? `<small>${esc(b)}</small>` : ''}</span></li>`).join('')}</ol>`;
   if (s.chips) h += `<ul class="chips">${s.chips.map(([x,hl]) => `<li class="${hl ? 'hl' : ''}">${esc(x)}</li>`).join('')}</ul>`;
@@ -817,9 +814,12 @@ $('#hopPrev').onclick = () => hop(-1);
 $('#hopNext').onclick = () => hop(1);
 function playVideo(){
   const v = inner.querySelector('.vid video'); if (!v) return;
-  v.closest('.vid').scrollIntoView({ block:'nearest', behavior:'smooth' });
+  const f = v.closest('.vid');
+  f.scrollIntoView({ block:'nearest', behavior:'smooth' });
+  f.classList.add('on'); v.controls = true;
   const p = v.play(); if (p && p.catch) p.catch(() => {});
 }
+panel.addEventListener('click', e => { if (e.target.closest('.vplay')) { touchUser(); playVideo(); } });
 $('#capPlay').addEventListener('click', e => {
   e.stopPropagation(); touchUser();
   const it = ITEMS[cur]; if (typeof it.videoSec !== 'number' || lock || mode !== 'carousel') return;
