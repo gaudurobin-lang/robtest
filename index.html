@@ -154,7 +154,7 @@ body.is-detail #detail{pointer-events:auto}
 .hero-can .bwrap{--w:min(49vh,29vw);margin-left:calc(var(--w)/-2);margin-top:calc(var(--w)*-.74)}
 body.is-detail .hero-can .badge{transform:rotateY(180deg);transition-delay:.35s}
 
-.panel{position:absolute;left:calc(var(--pad) + 1vw);top:54%;transform:translateY(-50%);width:min(44vw,600px);max-height:calc(100vh - 210px);overflow:auto;z-index:3;
+.panel{position:absolute;left:calc(var(--pad) + 1vw);top:calc(var(--pad) + 122px);width:min(44vw,600px);max-height:calc(100vh - 2 * var(--pad) - 168px);overflow:auto;z-index:3;
   padding:clamp(22px,2.4vw,36px);border-radius:22px;background:rgba(255,255,255,.95);
   box-shadow:0 30px 60px -30px rgba(15,29,51,.45);opacity:0;transition:opacity .6s;scrollbar-width:thin}
 body.is-detail .panel{opacity:1;transition-delay:.55s}
@@ -185,15 +185,20 @@ body.is-detail .panel{opacity:1;transition-delay:.55s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;font-size:clamp(15.5px,1.12vw,17.5px);line-height:1.45}
 .steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;font-size:13px}
 .steps li small{display:block;color:var(--mute);font-size:.88em}
-.vid{margin:18px auto 4px;width:min(100%,calc(min(62vh,560px) * 9 / 16));border-radius:16px;overflow:hidden;background:#0f1d33;box-shadow:0 18px 40px -20px rgba(15,29,51,.6)}
+.vsplit{display:grid;grid-template-columns:min(44%,max(150px,calc((100vh - 2 * var(--pad) - 400px) * 9 / 16))) 1fr;gap:clamp(16px,1.6vw,24px);align-items:start;margin-top:4px}
+.vid{margin:0;border-radius:16px;overflow:hidden;background:#0f1d33;box-shadow:0 18px 40px -20px rgba(15,29,51,.6)}
 .vid video{display:block;width:100%;aspect-ratio:9/16;height:auto;background:#0f1d33}
-.vid figcaption{font-size:13px;color:var(--mute);padding:8px 12px;background:#fff;text-align:center}
+.vside p.txt{font-size:clamp(15px,1.08vw,17px);line-height:1.55}
+.vside .stats{grid-template-columns:1fr;gap:8px;margin-top:14px}
+.vside .stats div{display:flex;align-items:baseline;gap:10px;padding:10px 14px}
+.vside .stats span{margin-top:0}
+.panel h2.h-vid{font-size:clamp(26px,2.5vw,40px);margin-bottom:14px}
 .cap-h{display:inline-flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
-.play{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 10px;border-radius:999px;background:var(--c,#6d4cff);color:#fff;font:700 15px/1 var(--sans);letter-spacing:0;box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000);transition:transform .25s var(--soft),box-shadow .25s;animation:playPulse 2.4s ease-in-out infinite}
-.play svg{width:26px;height:26px;padding:5px;border-radius:50%;background:rgba(255,255,255,.22)}
+.play{pointer-events:auto;position:relative;top:.1em;display:inline-flex;align-items:center;gap:7px;padding:6px 15px 6px 7px;border-radius:999px;background:var(--c,#6d4cff);color:#fff;font:700 15px/1 var(--sans);letter-spacing:0;box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000);transition:transform .25s var(--soft),box-shadow .25s;animation:playPulse 2.4s ease-in-out infinite}
+.play svg{width:24px;height:24px;padding:5px;border-radius:50%;background:rgba(255,255,255,.22)}
 .play:hover{transform:scale(1.06)}
 .play[hidden]{display:none}
-@keyframes playPulse{0%,100%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 0 color-mix(in oklab,var(--c,#6d4cff) 45%,transparent)}50%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 10px transparent}}
+@keyframes playPulse{0%,100%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 0 color-mix(in oklab,var(--c,#6d4cff) 45%,transparent)}50%{box-shadow:0 10px 24px -10px color-mix(in oklab,var(--c,#6d4cff) 80%,#000),0 0 0 8px transparent}}
 @media (prefers-reduced-motion:reduce){.play{animation:none}}
 .face li{cursor:pointer}
 body.is-detail .face li:not(.on):hover{background:rgba(255,255,255,.18);color:#fff}
@@ -318,6 +323,8 @@ body.loaded #loader{opacity:0;visibility:hidden}
   .d-top .pill{padding:7px 12px;font-size:12px}
   .d-bot{left:10px;right:10px;bottom:16px;justify-content:space-between}
   .d-hint{display:none}
+  .vsplit{grid-template-columns:1fr}
+  .vid{width:min(100%,calc((100vh - 470px) * 9 / 16),calc((100dvh - 470px) * 9 / 16));min-width:160px;margin:0 auto}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.2s!important}
@@ -435,8 +442,7 @@ const ITEMS = [
       bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les e-mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
     { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes"],
       text:["Il lit mes alertes emploi dans Gmail, écarte les offres hors cible et note chaque offre sur 100 face à mon profil. Construit dans Claude puis dans n8n, il se lance seul chaque matin."],
-      stats:[['38','e-mails lus'],['52','offres extraites'],['32','offres notées']],
-      img:['img/n8n-agent-offres.webp',"Le workflow n8n, exécution du 9 novembre 2026"] },
+      stats:[['38','e-mails lus'],['52','offres extraites'],['32','offres notées']] },
     { tag:'Projet 2', title:'Workflow HubSpot → IA',
       text:["Un nouveau lead arrive dans HubSpot : n8n anonymise ses données, l'API Claude rédige un e-mail de bienvenue dans sa langue, et un brouillon est créé dans Gmail. L'IA ne reçoit ni adresse e-mail ni numéro de téléphone."],
       steps:[['HubSpot','nouveau contact'],['n8n','anonymisation'],['Claude','rédaction'],['Gmail','brouillon à valider']] },
@@ -702,10 +708,11 @@ function sectionHTML(s){
   const it = ITEMS[cur];
   let h = `<p class="p-kicker mono"><b>${esc(it.title)}</b> · ${pad2(sec + 1)} / ${pad2(it.sections.length)}</p>`;
   h += s.avant ? `<p class="tag"><i>×</i><s>${esc(s.avant)}</s></p>` : `<p class="tag"><i>+</i><span>${esc(s.tag)}</span></p>`;
-  h += `<h2>${esc(s.title)}</h2>`;
+  h += `<h2${s.video ? ' class="h-vid"' : ''}>${esc(s.title)}</h2>`;
+  if (s.video) h += `<div class="vsplit"><figure class="vid"><video controls playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video></figure><div class="vside">`;
   if (s.text) h += [].concat(s.text).map(t => `<p class="txt">${esc(t)}</p>`).join('');
-  if (s.video) h += `<figure class="vid"><video controls playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video><figcaption>${esc(s.video[2])}</figcaption></figure>`;
   if (s.stats) h += `<div class="stats">${s.stats.map(([a,b]) => `<div><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`).join('')}</div>`;
+  if (s.video) h += `</div></div>`;
   if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
   if (s.steps) h += `<ol class="steps">${s.steps.map(([a,b]) => `<li><span>${esc(a)}${b ? `<small>${esc(b)}</small>` : ''}</span></li>`).join('')}</ol>`;
   if (s.chips) h += `<ul class="chips">${s.chips.map(([x,hl]) => `<li class="${hl ? 'hl' : ''}">${esc(x)}</li>`).join('')}</ul>`;
@@ -810,7 +817,7 @@ $('#hopPrev').onclick = () => hop(-1);
 $('#hopNext').onclick = () => hop(1);
 function playVideo(){
   const v = inner.querySelector('.vid video'); if (!v) return;
-  v.closest('.vid').scrollIntoView({ block:'center', behavior:'smooth' });
+  v.closest('.vid').scrollIntoView({ block:'nearest', behavior:'smooth' });
   const p = v.play(); if (p && p.catch) p.catch(() => {});
 }
 $('#capPlay').addEventListener('click', e => {
