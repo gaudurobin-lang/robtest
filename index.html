@@ -191,6 +191,14 @@ body.is-detail .panel{opacity:1;transition-delay:.55s}
 .vplay svg{width:78px;height:78px;padding:20px 18px 20px 22px;border-radius:50%;background:var(--c);color:#fff;box-shadow:0 12px 30px -8px rgba(15,29,51,.6),0 0 0 8px rgba(255,255,255,.35);transition:transform .25s var(--soft)}
 .vplay:hover svg{transform:scale(1.08)}
 .vid.on .vplay{opacity:0;pointer-events:none}
+.vid.land{--vh:auto;height:auto;width:100%;aspect-ratio:16/9;margin-top:10px;cursor:pointer}
+.vid.land img{display:block;width:100%;height:100%;object-fit:cover}
+.vid.land .vplay{align-content:center;gap:14px;grid-auto-flow:row}
+.vid.land .vplay span{color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;background:rgba(15,29,51,.55)}
+.overlay.vid-ov{background:rgba(15,29,51,.92);padding:calc(var(--pad) + 56px) var(--pad) var(--pad)}
+.vid-ov .ov-close{z-index:2}
+.vid-wrap{margin:auto;width:min(100%,calc((100vh - 2 * var(--pad) - 80px) * 16 / 9));aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0f1d33;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.vid-wrap video{display:block;width:100%;height:100%;background:#0f1d33}
 .panel h2.h-vid{font-size:clamp(26px,2.5vw,40px);margin-bottom:14px;text-align:center}
 .panel .inner:has(.vid) .p-kicker{justify-content:center}
 .panel .inner:has(.vid) .tag{display:none}
@@ -379,6 +387,11 @@ body.loaded #loader{opacity:0;visibility:hidden}
   <ul class="menu-list" id="menuList"></ul>
 </div>
 
+<div class="overlay vid-ov" id="vidov" role="dialog" aria-modal="true" aria-label="Vidéo : mon agent d'offres d'emploi">
+  <button class="pill ov-close" data-close>Fermer ✕</button>
+  <div class="vid-wrap"><video id="vidovPlayer" controls playsinline preload="none"></video></div>
+</div>
+
 <div class="overlay" id="contact" role="dialog" aria-modal="true" aria-label="Contact">
   <button class="pill ov-close" data-close>Fermer ✕</button>
   <div class="contact-wrap">
@@ -440,7 +453,7 @@ const ITEMS = [
       chips:[['Claude',1],['ChatGPT',1],['Gemini',1],['Prompting',1],['Agents IA',1],['n8n'],['Zapier / Make'],['API Claude']] },
     { tag:'Chez Consentio', title:'IA en entreprise',
       bul:['Newsletters trilingues, tutoriels vidéo et analyse de données avec l\'IA générative','Des agents IA pour automatiser les e-mails clients','Un agent pour calculer l\'activité des clients sur la plateforme'] },
-    { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes"], },
+    { tag:'Projet 1', title:"Agent d'offres d'emploi", video:['video/agent-offres-emploi.mp4','video/agent-offres-emploi.jpg',"Vidéo : mon agent d'offres d'emploi expliqué en 40 secondes",'video/agent-offres-emploi-paysage.mp4','video/agent-offres-emploi-paysage.jpg'], },
     { tag:'Projet 2', title:'Workflow HubSpot → IA',
       text:["Un nouveau lead arrive dans HubSpot : n8n anonymise ses données, l'API Claude rédige un e-mail de bienvenue dans sa langue, et un brouillon est créé dans Gmail. L'IA ne reçoit ni adresse e-mail ni numéro de téléphone."],
       steps:[['HubSpot','nouveau contact'],['n8n','anonymisation'],['Claude','rédaction'],['Gmail','brouillon à valider']] },
@@ -707,7 +720,8 @@ function sectionHTML(s){
   let h = `<p class="p-kicker mono"><b>${esc(it.title)}</b> · ${pad2(sec + 1)} / ${pad2(it.sections.length)}</p>`;
   h += s.avant ? `<p class="tag"><i>×</i><s>${esc(s.avant)}</s></p>` : `<p class="tag"><i>+</i><span>${esc(s.tag)}</span></p>`;
   h += `<h2${s.video ? ' class="h-vid"' : ''}>${esc(s.title)}</h2>`;
-  if (s.video) h += `<figure class="vid"><video playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video><button class="vplay" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button></figure>`;
+  if (s.video && s.video[3] && !isMob()) h += `<figure class="vid land"><img src="${s.video[4]}" alt="${esc(s.video[2])}"><button class="vplay" data-ov="${s.video[3]}" aria-label="Lire la vidéo en grand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="mono">Regarder · 40 s</span></button></figure>`;
+  else if (s.video) h += `<figure class="vid"><video playsinline preload="metadata" poster="${s.video[1]}" aria-label="${esc(s.video[2])}"><source src="${s.video[0]}" type="video/mp4"></video><button class="vplay" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button></figure>`;
   if (s.text) h += [].concat(s.text).map(t => `<p class="txt">${esc(t)}</p>`).join('');
   if (s.stats) h += `<div class="stats">${s.stats.map(([a,b]) => `<div><strong>${esc(a)}</strong><span>${esc(b)}</span></div>`).join('')}</div>`;
   if (s.bul) h += `<ul class="bul">${s.bul.map(x => `<li>${x.replace(/<(?!\/?b>)/g, '&lt;')}</li>`).join('')}</ul>`;
@@ -812,7 +826,18 @@ $('#nextBtn').onclick = () => { touchUser(); go(cur + 1); };
 $('#backBtn').onclick = () => exit();
 $('#hopPrev').onclick = () => hop(-1);
 $('#hopNext').onclick = () => hop(1);
+const isMob = () => innerWidth < 861;
+function openVideoOv(){
+  const it = ITEMS[cur], s = it.sections[typeof it.videoSec === 'number' ? it.videoSec : sec];
+  if (!s || !s.video || !s.video[3]) return;
+  const v = $('#vidovPlayer');
+  if (v.getAttribute('src') !== s.video[3]) { v.setAttribute('poster', s.video[4]); v.setAttribute('src', s.video[3]); }
+  openOv('vidov');
+  v.currentTime = 0;
+  const p = v.play(); if (p && p.catch) p.catch(() => {});
+}
 function playVideo(){
+  if (!isMob() && inner.querySelector('.vid.land')) return openVideoOv();
   const v = inner.querySelector('.vid video'); if (!v) return;
   const f = v.closest('.vid');
   f.scrollIntoView({ block:'nearest', behavior:'smooth' });
@@ -823,7 +848,9 @@ panel.addEventListener('click', e => { if (e.target.closest('.vplay')) { touchUs
 $('#capPlay').addEventListener('click', e => {
   e.stopPropagation(); touchUser();
   const it = ITEMS[cur]; if (typeof it.videoSec !== 'number' || lock || mode !== 'carousel') return;
-  startSec = it.videoSec; autoPlay = true; enter();
+  startSec = it.videoSec;
+  if (isMob()) { autoPlay = true; enter(); }
+  else { enter(); openVideoOv(); }
 });
 hero.addEventListener('click', e => {
   const li = e.target.closest('.face li'); if (!li || mode !== 'detail' || lock) return;
@@ -845,7 +872,7 @@ inner.addEventListener('click', e => {
 $('#logo').onclick = e => { e.preventDefault(); closeOv(); mode === 'detail' ? exit(() => go(0)) : go(0); };
 
 function openOv(id){ closeOv(); const o = $('#' + id); o.classList.add('open'); o.scrollTop = 0; $('#menuBtn').setAttribute('aria-expanded', id === 'menu'); o.querySelector('[data-close]').focus({preventScroll:true}); }
-function closeOv(){ document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); $('#menuBtn').setAttribute('aria-expanded', 'false'); }
+function closeOv(){ const vp = $('#vidovPlayer'); if (vp) vp.pause(); document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); $('#menuBtn').setAttribute('aria-expanded', 'false'); }
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = closeOv);
 document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { touchUser(); openOv(b.dataset.open); });
 $('#menuBtn').onclick = () => openOv('menu');
