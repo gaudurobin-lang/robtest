@@ -668,7 +668,7 @@ function flipFrom(slot){
 function enter(k){
   if (lock || mode !== 'carousel') return;
   if (typeof k === 'number' && k !== cur) { go(k); lock = true; setTimeout(() => { lock = false; enter(); }, 950); return; }
-  lock = true; mode = 'zoom';
+  lock = true; mode = 'zoom'; wheelGuard = 0;
   const it = ITEMS[cur];
   hero.innerHTML = canHTML(it, true);
   hero.classList.add('on');
@@ -752,7 +752,7 @@ function render(first){
 function step(dir){
   if (lock || mode !== 'detail') return;
   const len = ITEMS[cur].sections.length;
-  if (dir > 0) { if (sec < len - 1) { sec++; render(); hold(600); } else hop(1); }
+  if (dir > 0) { if (sec < len - 1) { sec++; render(); hold(600); } else { wheelGuard = Date.now(); exit(() => { go(cur + 1); hold(350); }); } }
   else { if (sec > 0) { sec--; render(); hold(600); } else exit(); }
 }
 function hold(ms){ lock = true; setTimeout(() => lock = false, ms); }
@@ -765,12 +765,17 @@ const panelCanScroll = dir => {
   return dir > 0 ? panel.scrollTop + panel.clientHeight < panel.scrollHeight - 2 : panel.scrollTop > 0;
 };
 
-let acc = 0, lastWheel = 0, lastMag = 0, accTimer;
+let acc = 0, lastWheel = 0, lastMag = 0, accTimer, wheelGuard = 0;
 addEventListener('wheel', e => {
   if (overlayOpen()) return;
   if (mode === 'detail' && e.target.closest('.panel') && panelCanScroll(Math.sign(e.deltaY))) return;
   e.preventDefault();
   const now = Date.now(), mag = Math.abs(e.deltaY) + Math.abs(e.deltaX);
+  if (wheelGuard && mode !== 'detail') {
+    /* sortie d'une carte par le scroll : on attend un nouveau geste (molette relâchée 700 ms) avant d'ouvrir une carte */
+    if (mode !== 'carousel' || now - lastWheel < 700 || now - wheelGuard < 1800) { lastWheel = now; lastMag = mag; acc = 0; return; }
+    wheelGuard = 0;
+  }
   const inertia = now - lastWheel < 140 && mag <= lastMag;
   lastWheel = now; lastMag = mag;
   if (lock || mode === 'zoom') { acc = 0; return; }
